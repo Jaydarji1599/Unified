@@ -14,10 +14,9 @@
           colors: {
             navy: '#0A1A2F',
             teal: '#39D0C8',
-            offwhite: '#F7F9FB',
             charcoal: '#0F0F10',
-            slateGrey: '#64748B',
             cloudGrey: '#E4E7EB',
+            slateGrey: '#64748B',
             softRed: '#FF6A6A',
             luxeGold: '#F4C75B',
           },
@@ -32,407 +31,219 @@
 
   <style>
     html { scroll-behavior: smooth; }
-    .parallax { transform: translate3d(0,0,0); will-change: transform; }
-    .glass { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.10); }
 
-    /* Subtle noise layer */
+    .parallax { will-change: transform; }
+
     .noise:before{
       content:"";
       position:absolute; inset:0;
-      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" stitchTiles="stitch"/></filter><rect width="180" height="180" filter="url(%23n)" opacity=".20"/></svg>');
-      opacity:.06;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/></filter><rect width="180" height="180" filter="url(%23n)" opacity=".2"/></svg>');
+      opacity:.05;
       pointer-events:none;
       border-radius: inherit;
     }
 
-    /* Animated title text */
     .title-anim {
       position: relative;
       height: 1.6em;
       overflow: hidden;
     }
+
     .title-anim-item {
       position: absolute;
-      left: 0;
-      top: 0;
+      inset: 0;
       opacity: 0;
       transform: translateY(12px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+      transition: opacity .6s ease, transform .6s ease;
       white-space: nowrap;
     }
+
     .title-anim-item.active {
       opacity: 1;
       transform: translateY(0);
     }
+
     .gradient-txt {
-      background: linear-gradient(90deg, #ffffff, #39D0C8, #F4C75B);
+      background: linear-gradient(90deg, #fff, #39D0C8, #F4C75B);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
   </style>
 </head>
 
-<body class="bg-charcoal text-offwhite antialiased overflow-x-hidden">
+<body class="bg-charcoal text-white antialiased overflow-x-hidden">
 
-  <!-- Background glows -->
-  <div class="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
-    <div class="absolute -top-44 -right-40 h-[34rem] w-[34rem] rounded-full bg-teal/20 blur-3xl parallax" data-parallax data-strength="18"></div>
-    <div class="absolute top-44 -left-44 h-[28rem] w-[28rem] rounded-full bg-luxeGold/10 blur-3xl parallax" data-parallax data-strength="12"></div>
+<!-- BACKGROUND GLOWS -->
+<div class="pointer-events-none fixed inset-0 -z-10">
+  <div class="absolute -top-44 -right-44 h-[32rem] w-[32rem] rounded-full bg-teal/20 blur-3xl parallax"></div>
+  <div class="absolute top-40 -left-40 h-[26rem] w-[26rem] rounded-full bg-luxeGold/10 blur-3xl parallax"></div>
+</div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-30 border-b border-white/5 bg-charcoal/80 backdrop-blur-xl">
+  <div class="mx-auto max-w-6xl flex items-center justify-between px-4 py-4">
+    <div class="flex items-center gap-2">
+      <div class="h-10 w-10 rounded-2xl bg-gradient-to-br from-teal to-luxeGold flex items-center justify-center text-charcoal font-bold">
+        U
+      </div>
+      <span class="text-lg font-semibold">Unified</span>
+    </div>
+
+    <a href="#waitlist"
+       class="hidden md:inline-flex rounded-full bg-teal px-4 py-2 text-sm font-semibold text-charcoal shadow-lg shadow-teal/30 hover:bg-teal/90">
+      Join Waitlist
+    </a>
+  </div>
+</header>
+
+<main class="mx-auto max-w-6xl px-4 pt-16 pb-28">
+
+<!-- HERO -->
+<section class="grid md:grid-cols-2 gap-12 items-center">
+  <div class="space-y-8">
+
+    <span class="inline-flex items-center gap-2 text-sm text-cloudGrey border border-white/10 bg-white/5 px-3 py-1.5 rounded-full">
+      <span class="h-2.5 w-2.5 bg-teal rounded-full"></span>
+      Early access • Waitlist open
+    </span>
+
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight">
+      All your money.<br>
+      <span class="gradient-txt">One unified dashboard.</span>
+    </h1>
+
+    <!-- Animated line -->
+    <p class="title-anim text-lg md:text-xl font-medium">
+      <span class="title-anim-item gradient-txt">to control all your money in one place</span>
+      <span class="title-anim-item gradient-txt">to reduce financial noise and stress</span>
+      <span class="title-anim-item gradient-txt active">and finally see the full picture</span>
+    </p>
+
+    <p class="max-w-xl text-lg text-cloudGrey">
+      Securely connect your banks, track balances in real time, and understand your spending — without switching apps.
+    </p>
+
+    <!-- WAITLIST FORM (HERO) -->
+    <form
+      id="waitlist"
+      action="https://formspree.io/f/xgvgjrro"
+      method="POST"
+      class="flex flex-col sm:flex-row gap-3 bg-white/5 border border-white/10 rounded-2xl p-4"
+    >
+      <input type="email" name="email" required placeholder="Enter your email"
+             class="w-full px-4 py-3 rounded-xl bg-black/40 text-white placeholder:text-slateGrey focus:ring-2 focus:ring-teal outline-none">
+
+      <input type="hidden" name="source" value="hero_waitlist">
+      <input type="hidden" name="_redirect" value="https://jaydarji1599.github.io/Unified/?success=true">
+
+      <button type="submit"
+              class="px-6 py-3 rounded-xl bg-teal text-charcoal font-semibold shadow-lg shadow-teal/30 hover:bg-teal/90">
+        Join the Waitlist
+      </button>
+    </form>
+
+    <p class="text-sm text-cloudGrey">No spam. Unsubscribe anytime.</p>
   </div>
 
-  <!-- NAV -->
-  <header class="border-b border-white/5 bg-charcoal/75 backdrop-blur-xl sticky top-0 z-30">
-    <div class="mx-auto flex max-w-6xl items-center justify-between px-4 py-3 md:px-6 lg:px-8">
-      <div class="flex items-center gap-2">
-        <div class="flex h-10 w-10 items-center justify-center rounded-2xl bg-gradient-to-br from-teal to-luxeGold shadow-lg">
-          <span class="text-lg font-semibold text-charcoal">U</span>
-        </div>
-        <span class="text-lg font-semibold tracking-tight">Unified</span>
+  <!-- DASHBOARD MOCK -->
+  <div class="relative">
+    <div class="absolute -top-10 right-6 h-44 w-44 rounded-full bg-gradient-to-br from-teal/70 via-white/10 to-luxeGold/40 shadow-soft-3d noise"></div>
+
+    <div class="relative bg-gradient-to-b from-slate-900 via-navy to-charcoal rounded-[2.4rem] p-6 shadow-soft-3d">
+      <div class="flex justify-between text-sm text-cloudGrey mb-4">
+        <span>Unified • Overview</span>
+        <span>Live</span>
       </div>
 
-      <nav class="hidden items-center gap-8 text-sm text-cloudGrey/90 md:flex">
-        <a href="#features" class="hover:text-teal transition-colors">Features</a>
-        <a href="#security" class="hover:text-teal transition-colors">Security</a>
-        <a href="#waitlist" class="hover:text-teal transition-colors">Waitlist</a>
-      </nav>
-
-      <a href="#waitlist"
-        class="hidden rounded-full bg-teal px-4 py-2 text-sm font-semibold text-charcoal shadow-lg shadow-teal/30 hover:bg-teal/90 md:inline-block">
-        Join Waitlist
-      </a>
-    </div>
-  </header>
-
-  <main class="mx-auto max-w-6xl px-4 pb-24 pt-10 md:px-6 lg:px-8">
-
-    <!-- HERO -->
-    <section class="grid gap-12 py-10 md:grid-cols-[minmax(0,1.05fr)_minmax(0,1.1fr)] md:items-center lg:py-16">
-      <div class="space-y-8">
-        <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-sm text-cloudGrey/90">
-          <span class="inline-flex h-2.5 w-2.5 rounded-full bg-teal"></span>
-          Early access • Waitlist open
+      <div class="space-y-4">
+        <div class="bg-white/5 p-5 rounded-2xl">
+          <p class="text-cloudGrey text-sm">Total balance</p>
+          <p class="text-3xl font-semibold">$128,450.23</p>
+          <p class="text-sm text-teal">Updated just now</p>
         </div>
 
-        <div class="space-y-4">
-          <h1 class="text-4xl font-semibold tracking-tight sm:text-6xl lg:text-7xl">
-            All your money.<br />
-            <span class="bg-gradient-to-r from-white via-teal to-luxeGold bg-clip-text text-transparent">
-              One unified dashboard.
-            </span>
-          </h1>
-
-          <!-- Animated line (your requested structure) -->
-          <p class="title-anim mt-6 text-lg md:text-xl font-medium">
-            <span class="title-anim-item gradient-txt">
-              to control all your money in one place
-            </span>
-            <span class="title-anim-item gradient-txt">
-              to reduce financial noise and stress
-            </span>
-            <span class="title-anim-item gradient-txt active">
-              and finally see the full picture
-            </span>
-          </p>
-
-          <p class="max-w-xl text-base leading-relaxed text-cloudGrey md:text-lg">
-            Connect your banks securely, track balances in real time, and understand spending instantly —
-            without switching between apps.
-          </p>
-        </div>
-
-        <!-- Waitlist form -->
-        <form id="waitlist"
-          class="flex flex-col gap-3 rounded-2xl border border-white/10 bg-white/5 p-3 sm:flex-row sm:items-center sm:p-4"
-          onsubmit="event.preventDefault(); alert('Demo form — connect to your backend or form tool (Mailchimp, ConvertKit, etc.).');">
-          <input type="email" required placeholder="Enter your email"
-            class="w-full rounded-xl border-none bg-black/35 px-4 py-3 text-base text-offwhite placeholder:text-slateGrey focus:outline-none focus:ring-2 focus:ring-teal/70" />
-          <button type="submit"
-            class="inline-flex items-center justify-center rounded-xl bg-teal px-5 py-3 text-base font-semibold text-charcoal shadow-lg shadow-teal/30 transition hover:bg-teal/90">
-            Join the Waitlist
-          </button>
-        </form>
-
-        <div class="flex items-center gap-4 text-sm">
-          <a href="#how-it-works" class="text-cloudGrey hover:text-teal transition-colors">See how it works →</a>
-          <span class="text-cloudGrey/40">•</span>
-          <span class="text-cloudGrey/80">No spam. Unsubscribe anytime.</span>
-        </div>
-      </div>
-
-      <!-- VISUAL: Dashboard mockup + 3D elements -->
-      <div class="relative">
-        <!-- Floating 3D orb (parallax) -->
-        <div class="absolute -top-10 right-4 h-40 w-40 rounded-full bg-gradient-to-br from-teal/70 via-white/10 to-luxeGold/40 opacity-90 shadow-soft-3d parallax noise"
-             data-parallax data-strength="26"></div>
-
-        <!-- Main dashboard card -->
-        <div class="relative mx-auto w-full max-w-xl rounded-[2.4rem] bg-gradient-to-b from-slate-900 via-navy to-charcoal p-5 shadow-soft-3d">
-          <div class="mb-4 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-              <span class="h-2.5 w-2.5 rounded-full bg-red-500/70"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-amber-400/70"></span>
-              <span class="h-2.5 w-2.5 rounded-full bg-emerald-400/70"></span>
-            </div>
-            <span class="text-sm text-cloudGrey/70">Unified • Overview</span>
+        <div class="grid grid-cols-3 gap-3 text-sm">
+          <div class="bg-white/5 p-3 rounded-xl">
+            <p class="text-cloudGrey">Spend</p>
+            <p class="font-semibold">$1,842</p>
           </div>
-
-          <div class="grid gap-4 md:grid-cols-[1.1fr_minmax(0,1fr)] md:items-start">
-            <div class="space-y-4">
-              <div class="rounded-2xl bg-white/5 p-5">
-                <p class="text-sm uppercase tracking-wide text-cloudGrey/70">Total balance</p>
-                <p class="mt-2 text-3xl font-semibold">$128,450.23</p>
-                <p class="mt-1 text-sm text-teal">Live sync • Just now</p>
-              </div>
-
-              <div class="grid grid-cols-3 gap-3 text-sm">
-                <div class="rounded-xl bg-white/5 p-3">
-                  <p class="text-cloudGrey/70">Spend</p>
-                  <p class="mt-1 font-semibold">$1,842</p>
-                </div>
-                <div class="rounded-xl bg-white/5 p-3">
-                  <p class="text-cloudGrey/70">Subs</p>
-                  <p class="mt-1 font-semibold">$213</p>
-                </div>
-                <div class="rounded-xl bg-white/5 p-3">
-                  <p class="text-cloudGrey/70">Savings</p>
-                  <p class="mt-1 font-semibold">$24,900</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="space-y-3">
-              <div class="rounded-2xl bg-white/5 p-4">
-                <p class="mb-2 text-sm text-cloudGrey/70">Recent activity</p>
-                <div class="space-y-2 text-sm">
-                  <div class="flex items-center justify-between">
-                    <span>Air Canada</span><span class="text-softRed">- $482.90</span>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <span>Groceries</span><span class="text-softRed">- $86.40</span>
-                  </div>
-                  <div class="flex items-center justify-between">
-                    <span>Savings transfer</span><span class="text-teal">+ $250.00</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="rounded-2xl bg-white/5 p-4">
-                <p class="text-sm text-cloudGrey/70">Spending snapshot</p>
-                <div class="mt-3 flex items-end gap-2">
-                  <div class="h-14 w-3 rounded-full bg-gradient-to-t from-teal to-teal/30"></div>
-                  <div class="h-9 w-3 rounded-full bg-white/15"></div>
-                  <div class="h-16 w-3 rounded-full bg-white/20"></div>
-                  <div class="h-8 w-3 rounded-full bg-white/10"></div>
-                </div>
-                <p class="mt-2 text-xs text-cloudGrey/70">Auto-categorized in real time.</p>
-              </div>
-            </div>
+          <div class="bg-white/5 p-3 rounded-xl">
+            <p class="text-cloudGrey">Subs</p>
+            <p class="font-semibold">$213</p>
+          </div>
+          <div class="bg-white/5 p-3 rounded-xl">
+            <p class="text-cloudGrey">Savings</p>
+            <p class="font-semibold">$24,900</p>
           </div>
         </div>
-
-        <p class="mt-4 text-xs text-cloudGrey/70">
-          Concept mockup for the waitlist page. Final UI might match the product build.
-        </p>
-      </div>
-    </section>
-
-    <!-- TRUST + SECURITY -->
-    <section id="security" class="mt-4 rounded-2xl border border-white/10 bg-white/5 p-6">
-      <div class="flex flex-col gap-5 md:flex-row md:items-center md:justify-between">
-        <div class="max-w-2xl">
-          <p class="text-lg font-semibold">Built with enterprise-grade security.</p>
-          <p class="mt-2 text-base text-cloudGrey">
-            Encrypted. Validated. Permission-based. Your data stays yours.
-          </p>
-        </div>
-        <div class="grid grid-cols-2 gap-3 text-sm text-cloudGrey md:grid-cols-2">
-          <div class="flex items-center gap-2">
-            <span class="h-7 w-7 rounded-full border border-white/15 flex items-center justify-center font-semibold text-[12px]">✓</span>
-            <span>SSR auth</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="h-7 w-7 rounded-full border border-white/15 flex items-center justify-center font-semibold text-[12px]">✓</span>
-            <span>Plaid</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="h-7 w-7 rounded-full border border-white/15 flex items-center justify-center font-semibold text-[12px]">✓</span>
-            <span>Dwolla</span>
-          </div>
-          <div class="flex items-center gap-2">
-            <span class="h-7 w-7 rounded-full border border-white/15 flex items-center justify-center font-semibold text-[12px]">✓</span>
-            <span>Real-time sync</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- CORE VALUE -->
-    <section id="how-it-works" class="py-14">
-      <div class="max-w-2xl space-y-3">
-        <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">
-          Your financial life, finally in one place.
-        </h2>
-        <p class="text-lg text-cloudGrey">
-          Unified shows what you own, what you owe, and what you spend — without jumping between apps.
-        </p>
-      </div>
-
-      <div class="mt-8 grid gap-4 md:grid-cols-3">
-        <div class="rounded-2xl bg-white/5 p-6 shadow-card-soft">
-          <p class="mb-2 text-sm font-semibold text-teal uppercase tracking-wide">One dashboard</p>
-          <p class="text-lg font-semibold text-offwhite">Everything at a glance.</p>
-          <p class="mt-2 text-base text-cloudGrey/85">Balances + activity, unified live.</p>
-        </div>
-        <div class="rounded-2xl bg-white/5 p-6 shadow-card-soft">
-          <p class="mb-2 text-sm font-semibold text-teal uppercase tracking-wide">Smart categories</p>
-          <p class="text-lg font-semibold text-offwhite">Know where it goes.</p>
-          <p class="mt-2 text-base text-cloudGrey/85">Groceries, bills, subscriptions — auto.</p>
-        </div>
-        <div class="rounded-2xl bg-white/5 p-6 shadow-card-soft">
-          <p class="mb-2 text-sm font-semibold text-teal uppercase tracking-wide">Real-time sync</p>
-          <p class="text-lg font-semibold text-offwhite">Always current.</p>
-          <p class="mt-2 text-base text-cloudGrey/85">Updates instantly across the app.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FEATURES -->
-    <section id="features" class="space-y-6 py-6">
-      <div class="max-w-2xl">
-        <h3 class="text-3xl font-semibold md:text-4xl">Features that feel effortless.</h3>
-        <p class="mt-2 text-lg text-cloudGrey">Built for clarity. Designed for trust.</p>
-      </div>
-
-      <div class="grid gap-4 md:grid-cols-3">
-        <div class="rounded-2xl bg-white/5 p-6">
-          <p class="text-sm font-semibold text-teal">Connect</p>
-          <p class="mt-2 text-xl font-semibold">Link your banks securely.</p>
-          <p class="mt-2 text-base text-cloudGrey">Plaid-powered connections with masked details.</p>
-        </div>
-        <div class="rounded-2xl bg-white/5 p-6">
-          <p class="text-sm font-semibold text-teal">Search</p>
-          <p class="mt-2 text-xl font-semibold">Find any transaction fast.</p>
-          <p class="mt-2 text-base text-cloudGrey">Filter by date, amount, category, keyword.</p>
-        </div>
-        <div class="rounded-2xl bg-white/5 p-6">
-          <p class="text-sm font-semibold text-teal">Transfer</p>
-          <p class="mt-2 text-xl font-semibold">Move money with confidence.</p>
-          <p class="mt-2 text-base text-cloudGrey">Dwolla-backed transfers with validations built-in.</p>
-        </div>
-      </div>
-
-      <div class="rounded-2xl border border-white/10 bg-white/5 p-6">
-        <p class="text-sm font-semibold text-teal uppercase tracking-wide">Coming next</p>
-        <div class="mt-3 grid gap-2 text-base text-cloudGrey sm:grid-cols-2">
-          <span>• AI budgeting insights</span>
-          <span>• Subscription tracking</span>
-          <span>• Savings goals</span>
-          <span>• Credit optimization</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOUNDER STORY -->
-    <section class="py-14">
-      <div class="grid gap-8 md:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)] md:items-center">
-        <div class="space-y-3">
-          <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">
-            Why Unified exists.
-          </h2>
-          <p class="text-lg text-cloudGrey">
-            Managing money shouldn’t feel fragmented or stressful.
-          </p>
-          <p class="text-base text-cloudGrey">
-            I built Unified because the information you need is already there — it’s just scattered across banks, cards,
-            and apps. Unified brings it together into one calm, live dashboard so you can make decisions with confidence.
-          </p>
-          <p class="text-sm text-cloudGrey/70">— Founder, Unified</p>
-        </div>
-
-        <div class="rounded-3xl border border-white/10 bg-white/5 p-6">
-          <p class="mb-2 text-sm font-semibold uppercase tracking-wide text-cloudGrey/70">Waitlist perks</p>
-          <ul class="mt-3 space-y-2 text-base text-cloudGrey">
-            <li>• Early access when we launch</li>
-            <li>• Priority invites to new features</li>
-            <li>• Opportunity to shape the roadmap</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- FINAL CTA -->
-    <section class="mt-6 rounded-3xl bg-gradient-to-br from-navy via-charcoal to-black p-10 text-center shadow-soft-3d">
-      <h2 class="text-3xl font-semibold tracking-tight md:text-4xl">
-        Take control of your money — effortlessly.
-      </h2>
-      <p class="mx-auto mt-3 max-w-xl text-lg text-cloudGrey">
-        Join the waitlist for early access and invite-only rewards.
-      </p>
-      <form class="mx-auto mt-6 flex max-w-md flex-col gap-3 sm:flex-row sm:items-center"
-        onsubmit="event.preventDefault(); alert('Demo form — connect to your waitlist backend.');">
-        <input type="email" required placeholder="Enter your email"
-          class="w-full rounded-xl border-none bg-black/40 px-4 py-3 text-base text-offwhite placeholder:text-slateGrey focus:outline-none focus:ring-2 focus:ring-teal/70" />
-        <button type="submit"
-          class="inline-flex items-center justify-center rounded-xl bg-teal px-5 py-3 text-base font-semibold text-charcoal shadow-lg shadow-teal/30 transition hover:bg-teal/90">
-          Join Waitlist
-        </button>
-      </form>
-      <p class="mt-3 text-sm text-cloudGrey/70">No spam. Unsubscribe anytime.</p>
-    </section>
-
-  </main>
-
-  <footer class="border-t border-white/5 bg-charcoal/90 py-6 text-sm text-cloudGrey/70">
-    <div class="mx-auto flex max-w-6xl flex-col items-center justify-between gap-3 px-4 md:flex-row md:px-6 lg:px-8">
-      <p>© <span id="year"></span> Unified. All rights reserved.</p>
-      <div class="flex gap-6">
-        <button class="hover:text-teal">Privacy</button>
-        <button class="hover:text-teal">Security</button>
-        <button class="hover:text-teal">Contact</button>
       </div>
     </div>
-  </footer>
+  </div>
+</section>
 
-  <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+<!-- SECURITY -->
+<section class="mt-20 bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row justify-between gap-6">
+  <div>
+    <h3 class="text-xl font-semibold">Built with enterprise-grade security.</h3>
+    <p class="text-cloudGrey mt-2">Encrypted. Validated. Permission-based.</p>
+  </div>
+  <div class="grid grid-cols-2 gap-3 text-sm text-cloudGrey">
+    <span>✓ SSR Authentication</span>
+    <span>✓ Plaid Integration</span>
+    <span>✓ Dwolla Transfers</span>
+    <span>✓ Real-time Sync</span>
+  </div>
+</section>
 
-    // Rotating hero line
-    (function () {
-      const items = document.querySelectorAll('.title-anim-item');
-      let index = 2; // start on the "active" third item
-      if (!items.length) return;
+<!-- FINAL CTA -->
+<section class="mt-24 text-center bg-gradient-to-br from-navy via-charcoal to-black rounded-3xl p-12 shadow-soft-3d">
+  <h2 class="text-3xl md:text-4xl font-semibold">Take control of your money — effortlessly.</h2>
+  <p class="text-lg text-cloudGrey mt-3">Join the waitlist and shape what Unified becomes.</p>
 
-      setInterval(() => {
-        items[index].classList.remove('active');
-        index = (index + 1) % items.length;
-        items[index].classList.add('active');
-      }, 2800);
-    })();
+  <!-- WAITLIST FORM (FINAL CTA) -->
+  <form
+    action="https://formspree.io/f/xgvgjrro"
+    method="POST"
+    class="mt-6 mx-auto max-w-md flex flex-col sm:flex-row gap-3"
+  >
+    <input type="email" name="email" required placeholder="Enter your email"
+           class="w-full px-4 py-3 rounded-xl bg-black/40 text-white placeholder:text-slateGrey focus:ring-2 focus:ring-teal outline-none">
 
-    // Parallax (subtle, premium)
-    (function () {
-      const els = Array.from(document.querySelectorAll('[data-parallax]'));
-      if (!els.length) return;
+    <input type="hidden" name="source" value="final_cta">
+    <input type="hidden" name="_redirect" value="https://jaydarji1599.github.io/Unified/?success=true">
 
-      window.addEventListener('mousemove', (e) => {
-        const x = (e.clientX / window.innerWidth) - 0.5;
-        const y = (e.clientY / window.innerHeight) - 0.5;
-        els.forEach(el => {
-          const strength = Number(el.getAttribute('data-strength') || 10);
-          el.style.transform = `translate3d(${x * strength}px, ${y * strength}px, 0)`;
-        });
-      }, { passive: true });
+    <button type="submit"
+            class="px-6 py-3 rounded-xl bg-teal text-charcoal font-semibold shadow-lg shadow-teal/30 hover:bg-teal/90">
+      Join Waitlist
+    </button>
+  </form>
+</section>
 
-      window.addEventListener('scroll', () => {
-        const t = window.scrollY || 0;
-        els.forEach(el => {
-          const strength = Number(el.getAttribute('data-strength') || 10);
-          const scrollShift = (t * 0.01) * (strength * 0.15);
-          el.style.marginTop = `${scrollShift}px`;
-        });
-      }, { passive: true });
-    })();
-  </script>
+</main>
+
+<footer class="border-t border-white/5 py-6 text-center text-sm text-cloudGrey">
+  © <span id="year"></span> Unified. All rights reserved.
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // rotating hero line
+  (() => {
+    const items = document.querySelectorAll('.title-anim-item');
+    let index = 2;
+    setInterval(() => {
+      items[index].classList.remove('active');
+      index = (index + 1) % items.length;
+      items[index].classList.add('active');
+    }, 2800);
+  })();
+
+  // success message
+  if (new URLSearchParams(window.location.search).get('success')) {
+    alert("You're on the Unified waitlist. We'll be in touch soon.");
+  }
+</script>
 
 </body>
 </html>
