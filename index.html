@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Unified – All Your Money. One Dashboard.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            navy: '#0A1A2F',
+            teal: '#39D0C8',
+            charcoal: '#0F0F10',
+            cloudGrey: '#E4E7EB',
+            slateGrey: '#64748B',
+            softRed: '#FF6A6A',
+            luxeGold: '#F4C75B',
+          },
+          boxShadow: {
+            'soft-3d': '0 22px 45px rgba(0,0,0,0.45)',
+            'card-soft': '0 18px 40px rgba(15,23,42,0.5)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+
+    .parallax { will-change: transform; }
+
+    .noise:before{
+      content:"";
+      position:absolute; inset:0;
+      background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="180" height="180"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2"/></filter><rect width="180" height="180" filter="url(%23n)" opacity=".2"/></svg>');
+      opacity:.05;
+      pointer-events:none;
+      border-radius: inherit;
+    }
+
+    .title-anim {
+      position: relative;
+      height: 1.6em;
+      overflow: hidden;
+    }
+
+    .title-anim-item {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transform: translateY(12px);
+      transition: opacity .6s ease, transform .6s ease;
+      white-space: nowrap;
+    }
+
+    .title-anim-item.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .gradient-txt {
+      background: linear-gradient(90deg, #fff, #39D0C8, #F4C75B);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  </style>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-CLN4SGYW8L"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-CLN4SGYW8L');
+  </script>
+</head>
+
+<body class="bg-charcoal text-white antialiased overflow-x-hidden">
+
+<!-- BACKGROUND GLOWS -->
+<div class="pointer-events-none fixed inset-0 -z-10">
+  <div class="absolute -top-44 -right-44 h-[32rem] w-[32rem] rounded-full bg-teal/20 blur-3xl parallax"></div>
+  <div class="absolute top-40 -left-40 h-[26rem] w-[26rem] rounded-full bg-luxeGold/10 blur-3xl parallax"></div>
+</div>
+
+<!-- NAV -->
+<header class="sticky top-0 z-30 border-b border-white/5 bg-charcoal/80 backdrop-blur-xl">
+  <div class="mx-auto max-w-6xl flex items-center justify-between px-4 py-4">
+    <div class="flex items-center gap-2">
+      <div class="h-10 w-10 rounded-2xl bg-gradient-to-br from-teal to-luxeGold flex items-center justify-center text-charcoal font-bold">
+        U
+      </div>
+      <span class="text-lg font-semibold">Unified</span>
+    </div>
+
+    <a href="#waitlist"
+       class="hidden md:inline-flex rounded-full bg-teal px-4 py-2 text-sm font-semibold text-charcoal shadow-lg shadow-teal/30 hover:bg-teal/90">
+      Join Waitlist
+    </a>
+  </div>
+</header>
+
+<main class="mx-auto max-w-6xl px-4 pt-16 pb-28">
+
+<!-- HERO -->
+<section class="grid md:grid-cols-2 gap-12 items-center">
+  <div class="space-y-8">
+
+    <span class="inline-flex items-center gap-2 text-sm text-cloudGrey border border-white/10 bg-white/5 px-3 py-1.5 rounded-full">
+      <span class="h-2.5 w-2.5 bg-teal rounded-full"></span>
+      Early access • Waitlist open
+    </span>
+
+    <h1 class="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight">
+      All your money.<br>
+      <span class="gradient-txt">One unified dashboard.</span>
+    </h1>
+
+    <!-- Animated line -->
+    <p class="title-anim text-lg md:text-xl font-medium">
+      <span class="title-anim-item gradient-txt">to control all your money in one place</span>
+      <span class="title-anim-item gradient-txt">to reduce financial noise and stress</span>
+      <span class="title-anim-item gradient-txt active">and finally see the full picture</span>
+    </p>
+
+    <p class="max-w-xl text-lg text-cloudGrey">
+      Securely connect your banks, track balances in real time, and understand your spending — without switching apps.
+    </p>
+
+    <!-- WAITLIST FORM (HERO) -->
+    <form
+      id="waitlist"
+      action="https://formspree.io/f/xgvgjrro"
+      method="POST"
+      class="flex flex-col sm:flex-row gap-3 bg-white/5 border border-white/10 rounded-2xl p-4"
+    >
+      <input type="email" name="email" required placeholder="Enter your email"
+             class="w-full px-4 py-3 rounded-xl bg-black/40 text-white placeholder:text-slateGrey focus:ring-2 focus:ring-teal outline-none">
+
+      <input type="hidden" name="source" value="hero_waitlist">
+      <input type="hidden" name="_redirect" value="https://jaydarji1599.github.io/Unified/?success=true">
+
+      <button type="submit"
+              class="px-6 py-3 rounded-xl bg-teal text-charcoal font-semibold shadow-lg shadow-teal/30 hover:bg-teal/90">
+        Join the Waitlist
+      </button>
+    </form>
+
+    <p class="text-sm text-cloudGrey">No spam. Unsubscribe anytime.</p>
+  </div>
+
+  <!-- DASHBOARD MOCK -->
+  <div class="relative">
+    <div class="absolute -top-10 right-6 h-44 w-44 rounded-full bg-gradient-to-br from-teal/70 via-white/10 to-luxeGold/40 shadow-soft-3d noise"></div>
+
+    <div class="relative bg-gradient-to-b from-slate-900 via-navy to-charcoal rounded-[2.4rem] p-6 shadow-soft-3d">
+      <div class="flex justify-between text-sm text-cloudGrey mb-4">
+        <span>Unified • Overview</span>
+        <span>Live</span>
+      </div>
+
+      <div class="space-y-4">
+        <div class="bg-white/5 p-5 rounded-2xl">
+          <p class="text-cloudGrey text-sm">Total balance</p>
+          <p class="text-3xl font-semibold">$128,450.23</p>
+          <p class="text-sm text-teal">Updated just now</p>
+        </div>
+
+        <div class="grid grid-cols-3 gap-3 text-sm">
+          <div class="bg-white/5 p-3 rounded-xl">
+            <p class="text-cloudGrey">Spend</p>
+            <p class="font-semibold">$1,842</p>
+          </div>
+          <div class="bg-white/5 p-3 rounded-xl">
+            <p class="text-cloudGrey">Subs</p>
+            <p class="font-semibold">$213</p>
+          </div>
+          <div class="bg-white/5 p-3 rounded-xl">
+            <p class="text-cloudGrey">Savings</p>
+            <p class="font-semibold">$24,900</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECURITY -->
+<section class="mt-20 bg-white/5 border border-white/10 rounded-2xl p-6 flex flex-col md:flex-row justify-between gap-6">
+  <div>
+    <h3 class="text-xl font-semibold">Built with enterprise-grade security.</h3>
+    <p class="text-cloudGrey mt-2">Encrypted. Validated. Permission-based.</p>
+  </div>
+  <div class="grid grid-cols-2 gap-3 text-sm text-cloudGrey">
+    <span>✓ SSR Authentication</span>
+    <span>✓ Plaid Integration</span>
+    <span>✓ Dwolla Transfers</span>
+    <span>✓ Real-time Sync</span>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="mt-24 text-center bg-gradient-to-br from-navy via-charcoal to-black rounded-3xl p-12 shadow-soft-3d">
+  <h2 class="text-3xl md:text-4xl font-semibold">Take control of your money — effortlessly.</h2>
+  <p class="text-lg text-cloudGrey mt-3">Join the waitlist and shape what Unified becomes.</p>
+
+  <!-- WAITLIST FORM (FINAL CTA) -->
+  <form
+    action="https://formspree.io/f/xgvgjrro"
+    method="POST"
+    class="mt-6 mx-auto max-w-md flex flex-col sm:flex-row gap-3"
+  >
+    <input type="email" name="email" required placeholder="Enter your email"
+           class="w-full px-4 py-3 rounded-xl bg-black/40 text-white placeholder:text-slateGrey focus:ring-2 focus:ring-teal outline-none">
+
+    <input type="hidden" name="source" value="final_cta">
+    <input type="hidden" name="_redirect" value="https://jaydarji1599.github.io/Unified/?success=true">
+
+    <button type="submit"
+            class="px-6 py-3 rounded-xl bg-teal text-charcoal font-semibold shadow-lg shadow-teal/30 hover:bg-teal/90">
+      Join Waitlist
+    </button>
+  </form>
+</section>
+
+</main>
+
+<footer class="border-t border-white/5 py-6 text-center text-sm text-cloudGrey">
+  © <span id="year"></span> Unified. All rights reserved.
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // rotating hero line
+  (() => {
+    const items = document.querySelectorAll('.title-anim-item');
+    let index = 2;
+    setInterval(() => {
+      items[index].classList.remove('active');
+      index = (index + 1) % items.length;
+      items[index].classList.add('active');
+    }, 2800);
+  })();
+
+  // success message
+  if (new URLSearchParams(window.location.search).get('success')) {
+    alert("You're on the Unified waitlist. We'll be in touch soon.");
+  }
+</script>
+
+</body>
+</html>
