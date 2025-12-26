@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { ContainerScroll } from '@/components/ui/container-scroll-animation'
 import Image from 'next/image'
 
-export default function Home() {
+function HomeContent() {
   const searchParams = useSearchParams()
   const [year, setYear] = useState('')
 
@@ -49,6 +49,7 @@ export default function Home() {
           >
             Join Waitlist
           </a>
+
         </div>
       </header>
 
@@ -56,24 +57,24 @@ export default function Home() {
         <section className="pt-2 sm:pt-4 md:pt-8 pb-0">
           <ContainerScroll
             titleComponent={
-              <div className="space-y-6 mb-8">
-                <span className="inline-flex items-center gap-2 text-sm text-cloudGrey border border-white/10 bg-white/5 px-3 py-1.5 rounded-full">
+              <div className="space-y-4 sm:space-y-6 mb-4 sm:mb-6 md:mb-8">
+                <span className="inline-flex items-center gap-2 text-xs sm:text-sm text-cloudGrey border border-white/10 bg-white/5 px-3 py-1.5 rounded-full">
                   <span className="h-2.5 w-2.5 bg-teal rounded-full"></span>
                   Early access • Waitlist open
                 </span>
 
-                <h1 className="text-4xl sm:text-6xl lg:text-7xl font-semibold tracking-tight">
+                <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight leading-tight">
                   All your money.<br />
                   <span className="gradient-txt">One unified dashboard.</span>
                 </h1>
 
-                <p className="title-anim text-lg md:text-xl font-medium mx-auto">
+                <p className="title-anim text-base sm:text-lg md:text-xl font-medium mx-auto">
                   <span className="title-anim-item gradient-txt">to control all your money in one place</span>
                   <span className="title-anim-item gradient-txt">to reduce financial noise and stress</span>
                   <span className="title-anim-item gradient-txt active">and finally see the full picture</span>
                 </p>
 
-                <p className="max-w-2xl mx-auto text-lg text-cloudGrey">
+                <p className="max-w-2xl mx-auto text-sm sm:text-base md:text-lg text-cloudGrey px-4 sm:px-0">
                   Securely connect your banks, track balances in real time, and understand your spending – without switching apps.
                 </p>
 
@@ -91,7 +92,7 @@ export default function Home() {
                     className="w-full px-4 py-3 rounded-xl bg-black/40 text-white placeholder:text-slateGrey focus:ring-2 focus:ring-teal outline-none"
                   />
                   <input type="hidden" name="source" value="hero_waitlist" />
-                  <input type="hidden" name="_redirect" value={`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/?success=true`} />
+                  <input type="hidden" name="_redirect" value={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://unified-landing.vercel.app'}/?success=true`} />
                   <button
                     type="submit"
                     className="px-6 py-3 rounded-xl bg-teal text-charcoal font-semibold shadow-lg shadow-teal/30 hover:bg-teal/90 whitespace-nowrap"
@@ -245,7 +246,7 @@ export default function Home() {
                 className="w-full px-4 py-3 rounded-xl bg-black/40 text-white placeholder:text-slateGrey focus:ring-2 focus:ring-teal outline-none"
               />
               <input type="hidden" name="source" value="final_cta" />
-              <input type="hidden" name="_redirect" value={`${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'}/?success=true`} />
+              <input type="hidden" name="_redirect" value={`${process.env.NEXT_PUBLIC_SITE_URL || 'https://unified-landing.vercel.app'}/?success=true`} />
               <button
                 type="submit"
                 className="px-6 py-3 rounded-xl bg-teal text-charcoal font-semibold shadow-lg shadow-teal/30 hover:bg-teal/90 whitespace-nowrap"
@@ -267,5 +268,13 @@ export default function Home() {
         </div>
       </footer>
     </div>
+  )
+}
+
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-charcoal" />}>
+      <HomeContent />
+    </Suspense>
   )
 }
