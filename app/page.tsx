@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { ContainerScroll } from '@/components/ui/container-scroll-animation'
-import Image from 'next/image'
+import DashboardPreview from '@/components/DashboardPreview'
 
 function HomeContent() {
   const searchParams = useSearchParams()
@@ -105,50 +105,7 @@ function HomeContent() {
               </div>
             }
           >
-            <div className="relative w-full h-full bg-gradient-to-b from-slate-900 via-navy to-charcoal rounded-3xl overflow-hidden">
-              <Image
-                src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&h=900&fit=crop&q=80"
-                alt="Unified Dashboard Preview"
-                width={1400}
-                height={900}
-                className="w-full h-full object-cover opacity-70"
-                draggable={false}
-                priority
-              />
-              
-              <div className="absolute inset-0 p-8 flex flex-col justify-between">
-                <div className="flex justify-between text-sm text-cloudGrey">
-                  <span className="text-white font-semibold">Unified • Overview</span>
-                  <span className="flex items-center gap-2">
-                    <span className="h-2 w-2 bg-teal rounded-full animate-pulse"></span>
-                    Live
-                  </span>
-                </div>
-
-                <div className="space-y-4">
-                  <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-6 rounded-2xl max-w-md">
-                    <p className="text-cloudGrey text-sm">Total balance</p>
-                    <p className="text-4xl font-semibold text-white">$128,450.23</p>
-                    <p className="text-sm text-teal">Updated just now</p>
-                  </div>
-
-                  <div className="grid grid-cols-3 gap-3 text-sm max-w-md">
-                    <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-xl">
-                      <p className="text-cloudGrey">Spend</p>
-                      <p className="font-semibold text-white">$1,842</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-xl">
-                      <p className="text-cloudGrey">Subs</p>
-                      <p className="font-semibold text-white">$213</p>
-                    </div>
-                    <div className="bg-white/10 backdrop-blur-xl border border-white/20 p-4 rounded-xl">
-                      <p className="text-cloudGrey">Savings</p>
-                      <p className="font-semibold text-white">$24,900</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <DashboardPreview />
           </ContainerScroll>
         </section>
 
